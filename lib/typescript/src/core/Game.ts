@@ -27,25 +27,33 @@ export class Game {
     private ground: Ground;
 
     /**
+     * 用于生成食物的棋盘
+     * @private
+     * @type {Ground}
+     * @memberof Game
+     */
+    private foodGround: Ground;
+
+    /**
      * 食物数组
      * @private
      * @type {Array<IFood>}
      * @memberof Game
      */
-    private foods: Array<IFood>;
+    private foods: Array<IFood> = [];
 
     constructor({
-        width= 10, 
-        height= 10, 
-        headerPostion,
+        width= 10,
+        height= 10,
+        headerPosition,
         direction,
         bodyLength= 3,
     }:{
         width?: number,
         height?: number,
-        headerPostion?: ICell, 
-        direction?: Direction, 
-        bodyLength?: number, 
+        headerPosition?: ICell,
+        direction?: Direction,
+        bodyLength?: number,
     }) {
         //初始化方向
         if(direction){
@@ -53,8 +61,8 @@ export class Game {
         }
 
         //设置头部的默认值，方向默认值
-        if(headerPostion){
-            headerPostion = {
+        if(!headerPosition){
+            headerPosition = {
                 x: Math.floor( width / 2 ),
                 y: Math.floor( height / 2 ),
             }
@@ -62,13 +70,17 @@ export class Game {
 
         //创建蛇
         this.snake = new Snake({
-            headerPostion: headerPostion, 
-            direction: direction, 
-            bodyLength: bodyLength, 
+            headerPosition: headerPosition,
+            direction: direction,
+            bodyLength: bodyLength,
         })
 
         //创建棋盘
         this.ground = new Ground(width, height)
+        this.foodGround = new Ground(width, height)
+
+        //创建食物
+        this.createFood()
     }
 
     /**
@@ -78,21 +90,40 @@ export class Game {
         const cell = this.ground.getRoadomUnmarkCell(1)[0];
         this.foods.push(new Food(cell.x, cell.y, 1));
     }
-    
+
 
     /**
      * 一帧
      */
-    frame(): void{
-        this.ground.rest();
-        this.ground.print(this.foods, this.snake.header, this.snake.body);
+    frame(): Array<Array<boolean>>{
 
         var eatFood = this.snake.move(this.foods)
 
         if(eatFood){
+            //去除已经吃掉的食物
             this.foods = this.foods.filter(item => item != eatFood)
-            const cell = this.ground.getRoadomUnmarkCell(1)[0];
-            this.foods.push(new Food(cell.x, cell.y, 1));
+            this.createFood();
         }
+
+        this.ground.rest();
+        return this.ground.print(this.foods, this.snake.header, this.snake.body);
+    }
+
+    /**
+     * 转向
+     * @param willTurnDirection     方向
+     */
+    turn(willTurnDirection: Direction){
+        this.snake.turn(willTurnDirection)
+    }
+
+    /**
+     * 创建食物
+     */
+    private createFood(){
+        this.foodGround.rest();
+        this.foodGround.print(this.foods, this.snake.header, this.snake.body);
+        const cell = this.foodGround.getRoadomUnmarkCell(1)[0];
+        this.foods.push(new Food(cell.x, cell.y, 1));
     }
 }

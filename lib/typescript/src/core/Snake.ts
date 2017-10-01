@@ -1,7 +1,4 @@
 import {
-    Game,
-} from './Game'
-import {
     Direction,
     DirectionTools
 } from './Direction'
@@ -10,7 +7,7 @@ import {
     ICell,
     ReadOnlyCell
 } from './Cell'
-import { 
+import {
     Food,
     IFood
 } from "./Food";
@@ -21,9 +18,9 @@ class Snake{
      */
     protected $header: ICell
     get header() :ReadOnlyCell{
-        return ReadOnlyCell.clone(this.$header) 
+        return ReadOnlyCell.clone(this.$header)
     }
-    
+
     /**
      * 身体
      */
@@ -31,7 +28,7 @@ class Snake{
     get body() : Array<ReadOnlyCell>{
         return this.$body.map(item => ReadOnlyCell.clone(item))
     }
-    
+
     /**
      * 移动方向
      */
@@ -39,17 +36,17 @@ class Snake{
     get direction() :Direction{
         return this.$direction
     }
-    
+
     /**
      * 预计的移动方向
      */
-    protected $willTrunDirection: Direction
+    protected $willTurnDirection: Direction
 
     /**
     * 将要生长数量
     */
-    protected $growAmount: Direction
-    get growAmount() :Direction{
+    protected $growAmount: number = 0
+    get growAmount() :number{
         return this.$growAmount
     }
 
@@ -58,51 +55,52 @@ class Snake{
      * @param options 默认配置
      * @param options.direction         方向
      * @param options.bodyLength        身体初始长度
-     * @param options.headerPostion     初始头部坐标
+     * @param options.headerPosition     初始头部坐标
      */
-    protected $defluatOption = {
-        direction: Direction.Up, 
-        bodyLength: 3, 
+    protected defaultOption = {
+        direction: Direction.Up,
+        bodyLength: 3,
     }
-    
+
     /**
      * 蛇的构造函数
-     * @param options 
+     * @param options
      * @param options.direction         方向
      * @param options.bodyLength        身体初始长度
-     * @param options.headerPostion     初始头部坐标
+     * @param options.headerPosition     初始头部坐标
      */
     constructor(options: {
-        headerPostion: ICell, 
-        direction?: Direction, 
-        bodyLength?: number, 
+        headerPosition: ICell,
+        direction?: Direction,
+        bodyLength?: number,
     }){
-        const _options = {
-            ...this.$defluatOption,
-            ...options,
+        //去除options中为定义的部分，这样可以让默认值覆盖为给定值
+        for(let key in this.defaultOption){
+            if(options[key] === undefined){
+                options[key] = this.defaultOption[key]
+            }
         }
 
-        this.$direction = _options.direction
-        this.$header = new Cell(_options.headerPostion.x, _options.headerPostion.y)
-        this.$direction = _options.direction
-        
+        this.$direction = this.$willTurnDirection = options.direction
+        this.$header = new Cell(options.headerPosition.x, options.headerPosition.y)
+
         //生成身体
         this.$body = [];
         let lastBody = this.$header;
-        for(let i = 0; i < _options.bodyLength; i++){
-            lastBody = Cell.getCellByDirection(lastBody, this.$direction);
+        for(let i = 0; i < options.bodyLength; i++){
+            lastBody = Cell.getCellByDirection(lastBody, DirectionTools.getReverse(this.$direction));
             this.$body.push(lastBody)
         }
     }
-    
+
     /**
      * 移动
-     * @param food 
+     * @param food
      */
     move(food:Array<IFood>|IFood): IFood{
         //同步方向改变
-        if(this.$willTrunDirection != this.$direction){
-            this.$direction = this.$willTrunDirection
+        if(this.$willTurnDirection != this.$direction){
+            this.$direction = this.$willTurnDirection
         }
 
         var canEatFood = this.canEat(food);
@@ -117,7 +115,7 @@ class Snake{
 
     /**
      * 移动
-     * @param food 
+     * @param food
      */
     private $move(){
         //如果增长度大于0，说明需要增长，
@@ -135,43 +133,46 @@ class Snake{
     /**
      * 转向
      */
-    trun(willTrunDirection: Direction){
+    turn(willTurnDirection: Direction){
         //如果要转向的方向，不和当前方向相反，则可以转向
-        if(!DirectionTools.reverse(willTrunDirection, this.$direction) ){
-            this.$willTrunDirection = willTrunDirection
+        if(!DirectionTools.reverse(willTurnDirection, this.$direction) ){
+            this.$willTurnDirection = willTurnDirection
         }
     }
 
     /**
      * 判断蛇是否可以吃食物
-     * @param {(Array<ICell>|ICell)} food 
-     * @returns 
+     * @param {(Array<ICell>|ICell)} food
+     * @returns
      * @memberof Snake
      */
     canEat(food:Array<IFood>|IFood): IFood{
+        let _food: Array<IFood>;
         if(!Array.isArray(food)){
-            food = [food]
+            _food = [food]
+        } else {
+            _food = food
         }
 
         const nextHeader = Cell.getCellByDirection(this.$header, this.$direction);
 
-        return food.filter(item => Cell.equal(item, nextHeader))[0] || null;
+        return _food.filter(item => Cell.equal(item, nextHeader))[0] || null;
     }
-    
+
     /**
      * 吃食物
-     * @param {IFood)} food 
-     * @returns 
+     * @param {IFood)} food
+     * @returns
      * @memberof Snake
      */
     eat(food:IFood){
         this.$growAmount += food.grow;
         this.$move()
     }
-    
+
     /**
      * 判断蛇是否已经死亡：头部包含在身体里面就认为蛇死亡了
-     * @returns 
+     * @returns
      * @memberof Snake
      */
     isDead(){

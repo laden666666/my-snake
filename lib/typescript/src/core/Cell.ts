@@ -20,17 +20,18 @@ class Cell implements ICell {
         this.x = x;
         this.y = y;
     }
-    
+
     /**
      * 判断两个cell是否相等
      * @static
-     * @param {ICell} cell1 
-     * @param {ICell} cell2 
-     * @returns {boolean} 
+     * @param {ICell} cell1
+     * @param {ICell} cell2
+     * @returns {boolean}
      * @memberof Cell
      */
     static equal(cell1: ICell, cell2: ICell): boolean {
-        return cell1.x === cell2.x && cell2.y === cell2.y
+
+        return cell1.x === cell2.x && cell1.y === cell2.y
     }
 
     /**
@@ -55,7 +56,7 @@ class Cell implements ICell {
             return new Cell(cell.x - 1, cell.y)
         } else if(Direction.Right == direction){
             return new Cell(cell.x + 1, cell.y)
-        }  
+        }
     }
 }
 
@@ -73,7 +74,7 @@ class ReadOnlyCell extends Cell {
     }
 
     static getCellByDirection(cell: ICell, direction: Direction): ReadOnlyCell{
-        return this.clone(super.getCellByDirection(cell, direction)) 
+        return this.clone(ReadOnlyCell.getCellByDirection(cell, direction))
     }
 }
 

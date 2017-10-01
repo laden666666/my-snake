@@ -5,16 +5,27 @@
 
 enum Direction {
     Up = 1,
-    Down,
-    Left,
-    Right,
+    Down = 2,
+    Left = 3,
+    Right = 4,
 }
 
 class DirectionTools{
     private constructor(){}
 
     static reverse(d1: Direction, d2: Direction): boolean{
-        return d1 == d2;
+        return DirectionTools.getReverse(d1) == d2;
+    }
+    static getReverse(d1: Direction): Direction{
+        if(d1 == Direction.Up){
+            return Direction.Down
+        } else if(d1 == Direction.Down){
+            return Direction.Up
+        } else if(d1 == Direction.Left){
+            return Direction.Right
+        } else if(d1 == Direction.Right){
+            return Direction.Left
+        }
     }
     static syntropy(d1: Direction, d2: Direction): boolean{
         if(d1 == Direction.Up && d2 == Direction.Down
