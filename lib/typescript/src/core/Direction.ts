@@ -13,9 +13,11 @@ enum Direction {
 class DirectionTools{
     private constructor(){}
 
-    static reverse(d1: Direction, d2: Direction): boolean{
-        return DirectionTools.getReverse(d1) == d2;
-    }
+    /**
+     * 获取一个方向的反方向
+     * @param d1
+     * @returns {Direction}
+     */
     static getReverse(d1: Direction): Direction{
         if(d1 == Direction.Up){
             return Direction.Down
@@ -27,7 +29,24 @@ class DirectionTools{
             return Direction.Left
         }
     }
-    static syntropy(d1: Direction, d2: Direction): boolean{
+
+    /**
+     * 判断两个方向是否是反向
+     * @param d1
+     * @param d2
+     * @returns {boolean}
+     */
+    static isReverse(d1: Direction, d2: Direction): boolean{
+        return DirectionTools.getReverse(d1) == d2;
+    }
+
+    /**
+     * 判断两个方向是否是同向
+     * @param d1
+     * @param d2
+     * @returns {boolean}
+     */
+    static isSyntropy(d1: Direction, d2: Direction): boolean{
         if(d1 == Direction.Up && d2 == Direction.Down
             || d1 == Direction.Right && d2 == Direction.Left
             || d1 == Direction.Down && d2 == Direction.Up

@@ -58,6 +58,34 @@ class Cell implements ICell {
             return new Cell(cell.x + 1, cell.y)
         }
     }
+
+
+    /**
+     * 获得一个坐标到另一个坐标的方向
+     * @param cell          需要计算的坐标
+     * @param direction     目标方向
+     */
+    static getDirectionByCell(cell1: ICell, cell2: ICell): Direction{
+        const dx = cell1.x - cell2.x
+        const dy = cell1.y - cell2.y
+
+        if(Math.abs(dx) > Math.abs(dy)){
+            if(dx > 0){
+                return Direction.Left
+            } else {
+                return Direction.Right
+            }
+        } else if(Math.abs(dx) < Math.abs(dy)){
+            if(dy > 0){
+                return Direction.Down
+            } else {
+                return Direction.Up
+            }
+        } else {
+            debugger
+            throw new Error('dx == dy')
+        }
+    }
 }
 
 class ReadOnlyCell extends Cell {

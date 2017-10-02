@@ -3,7 +3,9 @@
         <ul class="row-container">
             <li class="row" :key="rowIndex" v-for="(row, rowIndex) in reversedCells" :style="{clear: 'both'}">
                 <ul class="col-container">
-                    <li class="col" :key="colIndex" :class="{active: cell}" v-for="(cell, colIndex) in row"></li>
+                    <li class="col" :key="colIndex" v-for="(cell, colIndex) in row">
+                        <img class="snake-img" :src="imgMap[cell]" v-show="cell != '00'"/>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -11,6 +13,7 @@
 </template>
 
 <script>
+    import imgMap from './Snake/imgMap'
     const snake = require('../../lib/typescript/dist/snake')
     const {Game} = snake;
 
@@ -28,13 +31,14 @@
             return {
                 rowCount,
                 colCount,
+                imgMap,
                 cells: game.frame()
             }
         },
         computed: {
             // a computed getter
             reversedCells: function () {
-                return this.cells.reverse()
+                return this.cells.reverse().map(row=>row.reverse())
             }
         },
         created(){
@@ -48,9 +52,9 @@
                 } else if(event.keyCode == 40){
                     game.turn(2)
                 } else if(event.keyCode == 37){
-                    game.turn(4)
-                } else if(event.keyCode == 39){
                     game.turn(3)
+                } else if(event.keyCode == 39){
+                    game.turn(4)
                 }
             }
         }
@@ -71,7 +75,7 @@
         width: 100%;
     }
     .col-container{
-        height: 10px;
+        height: 20px;
         writing-mode: tb-rl;
         list-style: none;
         padding: 0;
@@ -79,11 +83,18 @@
         float: left;
     }
     .col{
-        width: 10px;
-        height: 10px;
+        width: 20px;
+        height: 20px;
         box-sizing: border-box;
+        position: relative;
     }
-    .col.active{
-        background: red;
+    .snake-img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 20px;
+        height: 20px;
+        z-index: -1;
     }
 </style>

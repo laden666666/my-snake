@@ -135,7 +135,7 @@ class Snake{
      */
     turn(willTurnDirection: Direction){
         //如果要转向的方向，不和当前方向相反，则可以转向
-        if(!DirectionTools.reverse(willTurnDirection, this.$direction) ){
+        if(!DirectionTools.isReverse(willTurnDirection, this.$direction) ){
             this.$willTurnDirection = willTurnDirection
         }
     }

@@ -8,6 +8,7 @@ import { Ground } from "./Ground";
 import { Direction } from "./Direction";
 import { ICell } from "./Cell";
 import { IFood, Food } from "./Food";
+import { Print } from "./Print";
 
 export class Game {
     /**
@@ -16,23 +17,23 @@ export class Game {
      * @type {Snake}
      * @memberof Game
      */
-    private snake: Snake;
+    private $snake: Snake;
 
     /**
-     * 棋盘
+     * 贪食蛇的坐标系
      * @private
      * @type {Ground}
      * @memberof Game
      */
-    private ground: Ground;
+    private $ground: Ground;
 
     /**
-     * 用于生成食物的棋盘
+     * 用于绘制游戏
      * @private
-     * @type {Ground}
+     * @type {Print}
      * @memberof Game
      */
-    private foodGround: Ground;
+    private $print: Print;
 
     /**
      * 食物数组
@@ -40,7 +41,7 @@ export class Game {
      * @type {Array<IFood>}
      * @memberof Game
      */
-    private foods: Array<IFood> = [];
+    private $food: Array<IFood> = [];
 
     constructor({
         width= 10,
@@ -69,44 +70,41 @@ export class Game {
         }
 
         //创建蛇
-        this.snake = new Snake({
+        this.$snake = new Snake({
             headerPosition: headerPosition,
             direction: direction,
             bodyLength: bodyLength,
         })
 
-        //创建棋盘
-        this.ground = new Ground(width, height)
-        this.foodGround = new Ground(width, height)
+        //创建贪食蛇的坐标系
+        this.$ground = new Ground(width, height)
+
+        //创建绘制对象
+        this.$print = new Print(width, height)
 
         //创建食物
-        this.createFood()
+        this.$createFood(3)
     }
-
-    /**
-     * 生成事物
-     */
-    makeFoot(): void{
-        const cell = this.ground.getRoadomUnmarkCell(1)[0];
-        this.foods.push(new Food(cell.x, cell.y, 1));
-    }
-
 
     /**
      * 一帧
      */
-    frame(): Array<Array<boolean>>{
+    frame(): Array<Array<String>>{
 
-        var eatFood = this.snake.move(this.foods)
+        var eatFood = this.$snake.move(this.$food)
 
         if(eatFood){
             //去除已经吃掉的食物
-            this.foods = this.foods.filter(item => item != eatFood)
-            this.createFood();
+            this.$food = this.$food.filter(item => item != eatFood)
+            this.$createFood();
         }
 
-        this.ground.rest();
-        return this.ground.print(this.foods, this.snake.header, this.snake.body);
+        this.$print.rest();
+        this.$print.printHead(this.$snake.header, this.$snake.direction)
+        this.$print.printBody(this.$snake.header, this.$snake.body)
+        this.$print.printFoot(this.$food)
+
+        return this.$print.cells
     }
 
     /**
@@ -114,16 +112,16 @@ export class Game {
      * @param willTurnDirection     方向
      */
     turn(willTurnDirection: Direction){
-        this.snake.turn(willTurnDirection)
+        this.$snake.turn(willTurnDirection)
     }
 
     /**
      * 创建食物
      */
-    private createFood(){
-        this.foodGround.rest();
-        this.foodGround.print(this.foods, this.snake.header, this.snake.body);
-        const cell = this.foodGround.getRoadomUnmarkCell(1)[0];
-        this.foods.push(new Food(cell.x, cell.y, 1));
+    private $createFood(count = 1){
+        const cells = this.$ground.getRandomUsableCells(count, this.$food, this.$snake.header, this.$snake.body);
+        cells.forEach(cell => {
+            this.$food.push(new Food(cell.x, cell.y, Math.floor(Math.random() * 3) + 1));
+        })
     }
 }
