@@ -1,27 +1,24 @@
 <template>
     <div id="app">
-        <Snake></Snake>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import Snake from './components/Snake.vue'
-
     export default {
-        name: 'app',
-        components: {
-            Snake
-        }
+        name: 'app'
     }
 </script>
 
 <style>
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    html,body{
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-        margin-top: 60px;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    #app{
+        height: 100%;
     }
 </style>

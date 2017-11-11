@@ -14,47 +14,49 @@
 
 <script>
     import imgMap from './Snake/imgMap'
-    const snake = require('../../lib/typescript/dist/snake')
-    const {Game} = snake;
-
-    const rowCount = 10;
-    const colCount = 10;
-
-    const game = new Game({
-        width: colCount,
-        height: rowCount,
-    })
-    window.game = game
 
     export default {
+        props:{
+            rowCount: {
+                type: Number,
+                required: true,
+            },
+            colCount: {
+                type: Number,
+                required: true,
+            },
+            game: {
+                type: Object,
+                required: true,
+            },
+        },
         data () {
             return {
-                rowCount,
-                colCount,
                 imgMap,
-                cells: game.frame()
+                cells: []
             }
         },
         computed: {
             // a computed getter
             reversedCells: function () {
                 return this.cells.reverse().map(row=>row.reverse())
-            }
+            },
         },
         created(){
             setInterval(()=>{
-                this.cells = game.frame()
+                if(this.game)
+                    this.cells = this.game.frame()
             }, 1000)
 
-            document.onkeydown=function(event) {
+            document.onkeydown=(event)=>{
                 if(event.keyCode == 38){
-                    game.turn(1)
+                    this.game.turn(1)
                 } else if(event.keyCode == 40){
-                    game.turn(2)
+                    this.game.turn(2)
                 } else if(event.keyCode == 37){
-                    game.turn(3)
+                    this.game.turn(3)
                 } else if(event.keyCode == 39){
-                    game.turn(4)
+                    this.game.turn(4)
                 }
             }
         }
