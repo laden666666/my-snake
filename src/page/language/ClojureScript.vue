@@ -1,32 +1,20 @@
 <template>
     <div id="app">
-        <Snake :rowCount="rowCount" :colCount="colCount" :game="game"></Snake>
     </div>
 </template>
 
 <script>
     import Snake from '../../components/Snake.vue'
-    const snake = require('../../../lib/typescript/dist/snake')
-    const {Game} = snake;
+    const snake = require('../../../lib/clojurescript/dist/app.snake')
 
-    const rowCount = 10;
-    const colCount = 10;
-    const game = new Game({
-        width: colCount,
-        height: rowCount,
-    })
+    window.snake = snake
 
     export default {
-        name: 'app',
         data(){
             return {
-                rowCount,
-                colCount,
-                game: game
             }
         },
         components: {
-            Snake
         }
     }
 </script>
