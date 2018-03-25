@@ -1,5 +1,5 @@
 {
-    "name": "snake",
+    "name": "flow-snake",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -8,7 +8,6 @@
         "build": "shadow-cljs relase app"
     },
     "devDependencies": {
-        "shadow-cljs": "^2.0.2"
     },
     "author": "",
     "license": "MIT"
