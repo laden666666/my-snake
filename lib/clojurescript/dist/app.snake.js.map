@@ -1,0 +1,1 @@
+{"version":3,"file":"app.snake.js","sources":["app/snake.cljs"],"mappings":";;;;;;;;;;AACA,cAAA,dAAKA","names":["app.snake/a"],"sourcesContent":["(ns app.snake)\r\n(def a 1)\r\n"]}

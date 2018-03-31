@@ -37,3 +37,4 @@ node_modules/
 *.log
 *.bat
 package-lock.json
+.shadow-cljs
