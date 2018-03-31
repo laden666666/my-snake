@@ -6,7 +6,7 @@
 
 <script>
     import Snake from '../../components/Snake.vue'
-    const snake = require('ts-snake')
+    const snake = require('../../../lib/typescript/dist/snake')
     const {Game} = snake;
 
     const rowCount = 10;
