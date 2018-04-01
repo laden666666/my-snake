@@ -1,2 +1,2 @@
 # typescript
-使用typescript开发，使用webpack的tsloader将typescript解析为es6，再用babel解析为es5。因为要对立打成一个js文件，所以将babel-polyfill也打进去了，导致最后输出的js文件非常大。实际使用这种形式开发的话，可以在页面中加载babel-polyfill，减小js文件的输出体积
+使用typescript开发，使用webpack的tsloader将typescript解析为es6，再用babel解析为es5。前期为了支持生成器函数，将babel-polyfill也打进去了，导致最后输出的js文件非常大。后期使用babel-runtime，解决了打包大小的问题。
