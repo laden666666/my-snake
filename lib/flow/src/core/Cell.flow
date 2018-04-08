@@ -1,3 +1,5 @@
+// @flow
+
 import {
     Direction
 } from './Direction'
@@ -6,7 +8,7 @@ import {
  * @file
  * 坐标
  */
-interface ICell {
+type ICell = {
     x: number,
     y: number
 }

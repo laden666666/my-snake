@@ -2,7 +2,7 @@
  * @file
  * 贪食蛇的坐标系
  */
-
+// @flow
 import {
     ICell,
     Cell,
@@ -61,7 +61,7 @@ enum CellShowType{
 
 export class Print extends Ground{
 
-    private $cells : Array<Array<CellShowType>> = []
+    $cells : Array<Array<CellShowType>> = []
     get cells() :Array<Array<String>>{
         return this.$cells.map(row=>{
             return row.map(col=> col ? col.toString() : '')
@@ -84,7 +84,7 @@ export class Print extends Ground{
      * @param cell
      * @param cellShowType
      */
-    private $printCell(cell: ICell, cellShowType: CellShowType){
+    $printCell(cell: ICell, cellShowType: CellShowType){
         if(!this.inGround(cell) || this.$cells[cell.y][cell.x] != CellShowType.BLANK){
             return;
         }
@@ -120,7 +120,7 @@ export class Print extends Ground{
         }
     }
 
-    private $getDirectionString(direction: Direction){
+    $getDirectionString(direction: Direction){
         if(direction == Direction.Up){
             return 'UP'
         } else if(direction == Direction.Down){
