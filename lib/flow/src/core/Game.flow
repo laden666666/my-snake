@@ -2,6 +2,7 @@
  * @file
  * 贪食蛇游戏
  */
+// @flow
 
 import { Snake } from "./Snake";
 import { Ground } from "./Ground";
@@ -17,7 +18,7 @@ export class Game {
      * @type {Snake}
      * @memberof Game
      */
-    private $snake: Snake;
+    $snake: Snake;
 
     /**
      * 贪食蛇的坐标系
@@ -25,7 +26,7 @@ export class Game {
      * @type {Ground}
      * @memberof Game
      */
-    private $ground: Ground;
+    $ground: Ground;
 
     /**
      * 用于绘制游戏
@@ -33,7 +34,7 @@ export class Game {
      * @type {Print}
      * @memberof Game
      */
-    private $print: Print;
+    $print: Print;
 
     /**
      * 食物数组
@@ -41,7 +42,7 @@ export class Game {
      * @type {Array<IFood>}
      * @memberof Game
      */
-    private $food: Array<IFood> = [];
+    $food: Array<IFood> = [];
 
     constructor({
         width= 10,
@@ -118,7 +119,7 @@ export class Game {
     /**
      * 创建食物
      */
-    private $createFood(count = 1){
+    $createFood(count = 1){
         const cells = this.$ground.getRandomUsableCells(count, this.$food, this.$snake.header, this.$snake.body);
         cells.forEach(cell => {
             this.$food.push(new Food(cell.x, cell.y, Math.floor(Math.random() * 3) + 1));

@@ -1,3 +1,5 @@
+// @flow
+
 /**
  * @file
  * 坐标
@@ -13,7 +15,7 @@ interface IFood extends ICell{
 
 class Food extends Cell implements IFood {
 
-    protected $grow : number
+    $grow : number
     get grow(): number{
         return this.$grow
     }

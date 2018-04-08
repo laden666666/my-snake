@@ -1,3 +1,4 @@
+// @flow
 import {
     Direction,
     DirectionTools
@@ -16,7 +17,7 @@ class Snake{
     /**
      * 头
      */
-    protected $header: ICell
+    $header: ICell
     get header() :ReadOnlyCell{
         return ReadOnlyCell.clone(this.$header)
     }
@@ -24,7 +25,7 @@ class Snake{
     /**
      * 身体
      */
-    protected $body: Array<ICell>
+    $body: Array<ICell>
     get body() : Array<ReadOnlyCell>{
         return this.$body.map(item => ReadOnlyCell.clone(item))
     }
@@ -32,7 +33,7 @@ class Snake{
     /**
      * 移动方向
      */
-    protected $direction: Direction
+    $direction: Direction
     get direction() :Direction{
         return this.$direction
     }
@@ -40,12 +41,12 @@ class Snake{
     /**
      * 预计的移动方向
      */
-    protected $willTurnDirection: Direction
+    $willTurnDirection: Direction
 
     /**
     * 将要生长数量
     */
-    protected $growAmount: number = 0
+    $growAmount: number = 0
     get growAmount() :number{
         return this.$growAmount
     }
@@ -57,7 +58,7 @@ class Snake{
      * @param options.bodyLength        身体初始长度
      * @param options.headerPosition     初始头部坐标
      */
-    protected defaultOption = {
+    defaultOption = {
         direction: Direction.Up,
         bodyLength: 3,
     }
@@ -117,7 +118,7 @@ class Snake{
      * 移动
      * @param food
      */
-    private $move(){
+    $move(){
         //如果增长度大于0，说明需要增长，
         if(this.$growAmount > 0){
             this.$body.unshift(this.$header);

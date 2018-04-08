@@ -3,6 +3,8 @@
  * 贪食蛇的坐标系
  */
 
+// @flow
+
 import {
     ICell,
     Cell,
@@ -13,7 +15,7 @@ import {
 
 class Ground {
 
-    constructor(protected width:number = 10, protected height:number = 10){
+    constructor(width:number = 10, height:number = 10){
     }
 
     /**
