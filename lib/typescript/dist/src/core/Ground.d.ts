@@ -3,7 +3,7 @@
  * 贪食蛇的坐标系
  */
 import { ICell } from './Cell';
-declare class Ground {
+export declare class Ground {
     protected width: number;
     protected height: number;
     constructor(width?: number, height?: number);
@@ -24,4 +24,3 @@ declare class Ground {
      */
     getRandomUsableCells(count: number, ...cells: Array<ICell | Array<ICell>>): Array<ICell>;
 }
-export { Ground };

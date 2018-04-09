@@ -1,7 +1,7 @@
 import { Direction } from './Direction';
 import { ICell, ReadOnlyCell } from './Cell';
 import { IFood } from "./Food";
-declare class Snake {
+export declare class Snake {
     /**
      * 头
      */
@@ -84,4 +84,3 @@ declare class Snake {
      */
     isDead(): boolean;
 }
-export { Snake };

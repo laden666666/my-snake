@@ -2,13 +2,13 @@
  * @file
  * 坐标方向
  */
-declare enum Direction {
+export declare enum Direction {
     Up = 1,
     Down = 2,
     Left = 3,
     Right = 4,
 }
-declare class DirectionTools {
+export declare class DirectionTools {
     private constructor();
     /**
      * 获取一个方向的反方向
@@ -31,4 +31,3 @@ declare class DirectionTools {
      */
     static isSyntropy(d1: Direction, d2: Direction): boolean;
 }
-export { Direction, DirectionTools };

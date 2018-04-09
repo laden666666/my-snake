@@ -7,11 +7,11 @@ import {
     ICell
 } from './Cell'
 
-interface IFood extends ICell{
+export interface IFood extends ICell{
     readonly grow: number;
 }
 
-class Food extends Cell implements IFood {
+export class Food extends Cell implements IFood {
 
     protected $grow : number
     get grow(): number{
@@ -26,9 +26,4 @@ class Food extends Cell implements IFood {
     clone(): Cell{
         return new Food(this.x, this.y, this.grow)
     }
-}
-
-export {
-    Food,
-    IFood
 }

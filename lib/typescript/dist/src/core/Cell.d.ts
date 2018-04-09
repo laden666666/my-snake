@@ -3,11 +3,11 @@ import { Direction } from './Direction';
  * @file
  * 坐标
  */
-interface ICell {
+export interface ICell {
     x: number;
     y: number;
 }
-declare class Cell implements ICell {
+export declare class Cell implements ICell {
     x: number;
     y: number;
     constructor(x: number, y: number);
@@ -38,11 +38,10 @@ declare class Cell implements ICell {
      */
     static getDirectionByCell(cell1: ICell, cell2: ICell): Direction;
 }
-declare class ReadOnlyCell extends Cell {
+export declare class ReadOnlyCell extends Cell {
     readonly x: number;
     readonly y: number;
     constructor(x: number, y: number);
     static clone(cell: ICell): ReadOnlyCell;
     static getCellByDirection(cell: ICell, direction: Direction): ReadOnlyCell;
 }
-export { ICell, ReadOnlyCell, Cell };

@@ -12,7 +12,7 @@ import {
     IFood
 } from "./Food";
 
-class Snake{
+export class Snake{
     /**
      * 头
      */
@@ -178,8 +178,4 @@ class Snake{
     isDead(){
         return this.$body.every(item=> !Cell.equal(this.$header, item));
     }
-}
-
-export {
-    Snake
 }

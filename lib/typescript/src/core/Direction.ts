@@ -3,14 +3,14 @@
  * 坐标方向
  */
 
-enum Direction {
+export enum Direction {
     Up = 1,
     Down = 2,
     Left = 3,
     Right = 4,
 }
 
-class DirectionTools{
+export class DirectionTools{
     private constructor(){}
 
     /**
@@ -56,9 +56,4 @@ class DirectionTools{
 
         return false
     }
-}
-
-export {
-    Direction,
-    DirectionTools
 }

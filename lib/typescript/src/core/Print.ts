@@ -21,7 +21,7 @@ import {
 /**
  * 贪食蛇游戏中，用于绘制的常量
  */
-enum CellShowType{
+export enum CellShowType{
     //空白
     BLANK = '00',
 
@@ -182,8 +182,4 @@ export class Print extends Ground{
             }
         })
     }
-}
-
-export {
-    Ground
 }

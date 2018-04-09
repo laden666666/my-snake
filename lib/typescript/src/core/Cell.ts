@@ -6,12 +6,12 @@ import {
  * @file
  * 坐标
  */
-interface ICell {
+export interface ICell {
     x: number,
     y: number
 }
 
-class Cell implements ICell {
+export class Cell implements ICell {
 
     x: number
     y: number
@@ -88,7 +88,7 @@ class Cell implements ICell {
     }
 }
 
-class ReadOnlyCell extends Cell {
+export class ReadOnlyCell extends Cell {
 
     readonly x: number
     readonly y: number
@@ -104,10 +104,4 @@ class ReadOnlyCell extends Cell {
     static getCellByDirection(cell: ICell, direction: Direction): ReadOnlyCell{
         return this.clone(ReadOnlyCell.getCellByDirection(cell, direction))
     }
-}
-
-export {
-    ICell,
-    ReadOnlyCell,
-    Cell
 }

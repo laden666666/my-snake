@@ -11,7 +11,7 @@ import {
     randomChoose
 } from '../util'
 
-class Ground {
+export class Ground {
 
     constructor(protected width:number = 10, protected height:number = 10){
     }
@@ -83,8 +83,4 @@ class Ground {
         const usableCellList = this.getUsableCells(...cells);
         return randomChoose(usableCellList, count)
     }
-}
-
-export {
-    Ground
 }
