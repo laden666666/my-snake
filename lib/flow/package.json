@@ -6,14 +6,18 @@
   "scripts": {
     "build": "webpack --config ./build/webpack.prod.conf.js --progress --hide-modules",
     "dev": "webpack --config ./build/webpack.prod.conf.js --progress --hide-modules --watch",
+    "babel": "babel --plugins syntax-flow  src/test.js -d dist --watch",
     "flowinit": "flow init"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-loader": "^7.1.2",
+    "babel-plugin-syntax-flow": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-typecheck": "^3.9.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-2": "^6.24.1",
     "flow-babel-webpack-plugin": "^1.1.1",
     "flow-bin": "^0.69.0",

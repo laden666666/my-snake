@@ -27,6 +27,12 @@
                     url: '/type_script',
                     home: 'http://www.typescriptlang.org/index.html',
                 },{
+                    icon: require('../assets/language/flow-logo.png'),
+                    name: 'Flow',
+                    describe: 'ClojureScript is a robust, practical, and fast programming language with a set of useful features that together form a simple, coherent, and powerful tool.',
+                    url: '/flow_script',
+                    home: 'https://clojurescript.org/',
+                },{
                     icon: require('../assets/language/cljs-logo.png'),
                     name: 'ClojureScript',
                     describe: 'ClojureScript is a robust, practical, and fast programming language with a set of useful features that together form a simple, coherent, and powerful tool.',

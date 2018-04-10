@@ -18,6 +18,10 @@ export default new Router({
             path: '/clojure_script',
             name: 'ClojureScript',
             component: () => import('../page/language/ClojureScript.vue')
+        },{
+            path: '/flow_script',
+            name: 'Flow',
+            component: () => import('../page/language/Flow.vue')
         }
     ]
 })
