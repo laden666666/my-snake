@@ -1,4 +1,4 @@
 {
-    "presets": ["flow"],
-    "plugins": ["syntax-flow", "typecheck"]
+    "presets": ["es2015", "stage-2", "flow"],
+    "plugins": ["syntax-flow", "typecheck", "transform-runtime"]
   }

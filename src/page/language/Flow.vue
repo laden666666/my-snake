@@ -7,6 +7,9 @@
 <script>
     import Snake from '../../components/Snake.vue'
     const snake = require('../../../lib/flow/dist/snake')
+
+    console.log(snake)
+
     // const {Game} = snake;
 
     const rowCount = 10;
