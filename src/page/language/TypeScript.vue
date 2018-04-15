@@ -11,14 +11,15 @@
 
     const rowCount = 10;
     const colCount = 10;
-    const game = new Game({
-        width: colCount,
-        height: rowCount,
-    })
+    let game
 
     export default {
         name: 'app',
         data(){
+            game = new Game({
+                width: colCount,
+                height: rowCount,
+            })
             return {
                 rowCount,
                 colCount,

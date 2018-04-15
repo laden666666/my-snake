@@ -29,9 +29,9 @@
                 },{
                     icon: require('../assets/language/flow-logo.png'),
                     name: 'Flow',
-                    describe: 'ClojureScript is a robust, practical, and fast programming language with a set of useful features that together form a simple, coherent, and powerful tool.',
+                    describe: 'Flow is designed to understand idiomatic JavaScript. It understands common JavaScript patterns and many of the weird things we JavaScript developers love to do.',
                     url: '/flow_script',
-                    home: 'https://clojurescript.org/',
+                    home: 'https://flow.org/en/',
                 },{
                     icon: require('../assets/language/cljs-logo.png'),
                     name: 'ClojureScript',

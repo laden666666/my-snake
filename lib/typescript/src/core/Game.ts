@@ -9,8 +9,11 @@ import { Direction } from "./Direction";
 import { ICell } from "./Cell";
 import { IFood, Food } from "./Food";
 import { Print } from "./Print";
+import {
+    IGame
+} from '../interface/IGame'
 
-export class Game {
+export class Game implements IGame{
     /**
      * 贪食蛇
      * @private
@@ -89,7 +92,7 @@ export class Game {
     /**
      * 一帧
      */
-    frame(): Array<Array<String>>{
+    frame(): Array<Array<string>>{
 
         var eatFood = this.$snake.move(this.$food)
 
@@ -113,6 +116,27 @@ export class Game {
      */
     turn(willTurnDirection: Direction){
         this.$snake.turn(willTurnDirection)
+    }
+
+    /**
+     * 检验游戏是否可以继续
+     */
+    check(): {
+        result: boolean
+    } {
+        let snakeCell: ICell[] = [...this.$snake.body, this.$snake.header]
+        let snakeCellMap = {}
+
+        return{
+            result: [...this.$snake.body, this.$snake.header].every(cell=>{
+                if(snakeCellMap[cell.x + ':' + cell.y] || !this.$ground.inGround(cell)){
+                    return false
+                } else {
+                    snakeCellMap[cell.x + ':' + cell.y] = true
+                    return true
+                }
+            })
+        }
     }
 
     /**

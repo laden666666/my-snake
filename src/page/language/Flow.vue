@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Snake :rowCount="rowCount" :colCount="colCount" :game="{}"></Snake>
+        <Snake :rowCount="rowCount" :colCount="colCount" :game="game"></Snake>
     </div>
 </template>
 
@@ -10,22 +10,23 @@
 
     console.log(snake)
 
-    // const {Game} = snake;
+    const {Game} = snake;
 
     const rowCount = 10;
     const colCount = 10;
-    // const game = new Game({
-    //     width: colCount,
-    //     height: rowCount,
-    // })
+    let game;
 
     export default {
         name: 'app',
         data(){
+            game = new Game({
+                width: colCount,
+                height: rowCount,
+            })
             return {
                 rowCount,
                 colCount,
-                // game: game
+                game: game
             }
         },
         components: {

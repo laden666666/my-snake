@@ -1,6 +1,7 @@
 import { Direction } from "./Direction";
 import { ICell } from "./Cell";
-export declare class Game {
+import { IGame } from '../interface/IGame';
+export declare class Game implements IGame {
     /**
      * 贪食蛇
      * @private
@@ -39,12 +40,18 @@ export declare class Game {
     /**
      * 一帧
      */
-    frame(): Array<Array<String>>;
+    frame(): Array<Array<string>>;
     /**
      * 转向
      * @param willTurnDirection     方向
      */
     turn(willTurnDirection: Direction): void;
+    /**
+     * 检验游戏是否可以继续
+     */
+    check(): {
+        result: boolean;
+    };
     /**
      * 创建食物
      */

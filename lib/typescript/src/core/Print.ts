@@ -62,7 +62,7 @@ export enum CellShowType{
 export class Print extends Ground{
 
     private $cells : Array<Array<CellShowType>> = []
-    get cells() :Array<Array<String>>{
+    get cells() :Array<Array<string>>{
         return this.$cells.map(row=>{
             return row.map(col=> col ? col.toString() : '')
         })

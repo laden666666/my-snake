@@ -43,9 +43,21 @@
             },
         },
         created(){
-            setInterval(()=>{
-                if(this.game)
+            clearInterval(this._timeout)
+            this._timeout = setInterval(()=>{
+                if(this.game){
+                    //绘制下一帧
                     this.cells = this.game.frame()
+
+                    //判断游戏是否结束
+                    let check = this.game.check()
+                    if(!check.result){
+                        clearInterval(this._timeout)
+                        setTimeout(()=>{
+                            alert('游戏结束')
+                        })
+                    }
+                }
             }, 1000)
 
             document.onkeydown=(event)=>{
@@ -59,6 +71,9 @@
                     this.game.turn(4)
                 }
             }
+        },
+        beforeDestroy(){
+            clearInterval(this._timeout)
         }
     }
 </script>

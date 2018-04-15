@@ -37,7 +37,7 @@ export declare enum CellShowType {
 }
 export declare class Print extends Ground {
     private $cells;
-    readonly cells: Array<Array<String>>;
+    readonly cells: Array<Array<string>>;
     constructor(width?: number, height?: number);
     /**
      * 绘制坐标
